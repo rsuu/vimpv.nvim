@@ -85,7 +85,12 @@ end
 M.pause = function() mpv_key.pause() end
 
 M.write = function()
+    vim.api.nvim_exec([[
+    :w
+    ]], false)
+
     mpv_key.write()
+
     vim.api.nvim_exec([[
     :e | norm! G
     ]], false)
