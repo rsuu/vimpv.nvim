@@ -42,7 +42,7 @@ local ass_path = config.ass_path
 local suffix = config.suffix
 
 -- LuaFormatter off
-local print_ass_text = {
+local ass_text = {
     {"[Script Info]", ""},
     {"Title: ", "Default ASS file"},
     {"ScriptType: ", "v4.00+"},
@@ -54,21 +54,19 @@ local print_ass_text = {
     {"Video Zoom Percent: ", "1"},
     {'\n', '\n'},
     {"[V4+ Styles]", ""},
-    {"Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline",
-    ", StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding"},
-    {"Style: opj,Kozuka Mincho Pr6N H,32,&H00ffffe8,&H00a00000,&H00a00000",
-    ",&H80a00000,0,0,0,0,100,100,0,0.00,1,2,0,9,10,10,10,1"
-    },
+    {"Format: Name, Fontname, Fontsize, PrimaryColour,SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, ",
+    "StrikeOut, ScaleX, ScaleY, Spacing, Angle,BorderStyle, Outline, Shadow, Alignment, MarginL,MarginR, MarginV, Encoding"},
+    {"Style: opj,Kozuka Mincho Pr6N H,32,&H00ffffe8,&H00a00000,&H00a00000,",
+    "&H80a00000,0,0,0,0,100,100,0,0.00,1,2,0,9,10,10,10,1"},
     {'\n', '\n'},
     {"[Events]", ""},
-    {"Format: Layer, Start, End, Style, Actor, MarginL",
-    ", MarginR, MarginV, Effect, Text"},
-
+    {"Format: Layer, Start, End, Style, Actor, MarginL, ",
+    "MarginR, MarginV, Effect, Text"},
 }
 -- LuaFormatter on
 
--- Config path: ~/.config/mpv/script-opts/tk4e_menu.conf
-mpopt.read_options(config, "tk4e_menu")
+-- Config path: ~/.config/mpv/script-opts/vimpv.conf
+mpopt.read_options(config, "vimpv")
 
 ------------------------------------------------------------
 -- Timings class
@@ -132,6 +130,10 @@ function file_exists(name)
     end
 end
 
+function print_ass_text()
+    for _, text in pairs(ass_text) do file:write(text[1] .. text[2], "\n") end
+end
+
 function time_format()
 
     local time_start_format = time_start_human
@@ -149,12 +151,8 @@ function time_format()
 
     else
         file = io.open(file_name, "a")
-        for _, text in pairs(print_ass_text) do
-            file:write(text[1] .. text[2], "\n")
-            file:write("Dialogue: 0,", time_start_format .. "," ..
-                           time_end_format .. ",Default,,0000,0000,0000,,", "\n")
 
-        end
+        print_ass_text()
 
     end
 

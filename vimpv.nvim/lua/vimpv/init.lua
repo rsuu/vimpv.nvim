@@ -92,7 +92,8 @@ M.write = function()
     mpv_key.write()
 
     vim.api.nvim_exec([[
-    :e | norm! G
+    :e
+    :call cursor('$',strwidth(getline('$')))
     ]], false)
 end
 

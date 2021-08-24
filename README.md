@@ -43,7 +43,7 @@ require('vimpv').setup {
     tmp_dir = "/tmp/mpv/",
     tmp_file = "ass.lock",
     tmp_path = "/tmp/mpv/ass.lock",
-        mode = "i",
+    mode = "i",
     key = {
         pause = "<c-SPACE>",
         write = "<c-w>",
@@ -63,8 +63,12 @@ vim.api.nvim_set_keymap('i', '<F1>', '<Cmd>:lua require"vimpv".menu()<CR>',
 ```sh
 # ~/.zshrc OR your config
 vimpv() {
+    vimpv_path='/tmp/mpv/ass.lock'
+    \rm $vimpv_path
+
     if  [ $1 ]; then
-        \mpv --input-ipc-server=/tmp/mpv/ass.lock $1 &> "/dev/null" 2>&1 &
+        \mpv --input-ipc-server=$vimpv_path $1 &> "/dev/null" 2>&1 &
+        echo 'script-binding tk4e_time_format' | socat - $vimpv_path
         nvim /tmp/`echo $1 | cut -d . -f1`.ass
     fi
 
