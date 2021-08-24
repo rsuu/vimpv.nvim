@@ -2,21 +2,6 @@
 
 WIP
 
-## How to use
-
-```sh
-pacman -S socat
-
-
-\mpv --input-ipc-server=/tmp/mpv/ass.lock ~/t/q.mp4
-nvim /tmp/q.ass
-
-
-# In neovim
-# i<F1><c-space><c-space>
-    # <F1>: open menu
-    # <c-space>: pause
-```
 
 
 ## Config
@@ -76,4 +61,20 @@ vimpv() {
 
 
 }
+```
+
+
+
+## How to use
+
+```sh
+pacman -S socat
+
+vimpv test.mkv
+
+
+# In neovim
+# i<F1><c-space><c-space><c-s><c-e><c-w>
+    # <F1>: open menu
+    # <c-space>: pause
 ```
