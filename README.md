@@ -69,6 +69,7 @@ vimpv() {
 
     if  [ $1 ]; then
         \mpv --input-ipc-server=$vimpv_path $1 &> "/dev/null" 2>&1 &
+        sleep 0.5
         echo 'script-binding tk4e_time_format' | socat - $vimpv_path
         nvim $vimpv_dir/`echo $1 | cut -d . -f1`.ass
     fi
