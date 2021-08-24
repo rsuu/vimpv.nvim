@@ -63,14 +63,16 @@ vim.api.nvim_set_keymap('i', '<F1>', '<Cmd>:lua require"vimpv".menu()<CR>',
 ```sh
 # ~/.zshrc OR your config
 vimpv() {
-    vimpv_path='/tmp/mpv/ass.lock'
-    \rm $vimpv_path
+    vimpv_dir='/tmp'
+    vimpv_file='mpv/ass.lock'
+    vimpv_path="$vimpv_dir/$vimpv_file"
 
     if  [ $1 ]; then
         \mpv --input-ipc-server=$vimpv_path $1 &> "/dev/null" 2>&1 &
         echo 'script-binding tk4e_time_format' | socat - $vimpv_path
-        nvim /tmp/`echo $1 | cut -d . -f1`.ass
+        nvim $vimpv_dir/`echo $1 | cut -d . -f1`.ass
     fi
+
 
 }
 ```
