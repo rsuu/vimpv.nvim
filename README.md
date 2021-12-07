@@ -69,7 +69,7 @@ vimpv() {
 
 ```sh
 # arch : pacman -S socat
-# unbuntu : apt install socat
+# ubuntu : apt install socat
 
 vimpv test.mkv
 
